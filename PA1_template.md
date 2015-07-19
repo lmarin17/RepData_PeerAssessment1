@@ -66,7 +66,7 @@ Given all days of data, which interval during the day has the highest average nu
 maxinterval <- avgday %>% filter(avgday$avgsteps == max(avgday$avgsteps))
 ```
 
-It looks like `r maxinterval$interval` is the time during the day with the highest average activity of `r maxinterval$avgsteps` steps.
+It looks like 0835 is the time during the day with the highest average activity of 206 steps.
 
    
 *** 
