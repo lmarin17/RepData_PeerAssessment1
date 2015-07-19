@@ -26,8 +26,8 @@ totday <- mutate(totday, avg = mean(sum))
 totday <- mutate(totday,median = median(sum))
 ```
 
-The average daily step total is `r min(totday$avg)`.
-The median daily step total is `r min(totday$median)`.
+The average daily step total is 9354.2295082.
+The median daily step total is 10395.
 
 We'll look at bin widths of 1000 and 2000 steps to get a picture of the daily distribution. 
 
@@ -36,14 +36,14 @@ ghist <- ggplot(totday, aes(sum)) + geom_histogram(fill = "blue", binwidth = 200
 ghist <- ghist + labs(title = "Distribution of Total Steps", x = "Steps per Day", y = "Number of days")
 ghist
 ```
-
+![figure 1](https://github.com/lmarin17/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-3-1.png)
 
 ```{r}
 ghist <- ggplot(totday, aes(sum)) + geom_histogram(fill = "blue", binwidth = 1000)
 ghist <- ghist + labs(title = "Distribution of Total Steps", x = "Steps per Day", y = "Number of days")
 ghist
 ```
-
+![figure 2](https://github.com/lmarin17/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-4-1.png)
 ***
 ### Look at Daily Activity Pattern
 
@@ -58,6 +58,7 @@ g <- g + labs(x = "5-minute Interval", y = "Average Steps", title = "Average Ste
 g <- g + theme(legend.position = "none")
 g
 ```
+![figure 3](https://github.com/lmarin17/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-5-1.png)
 
 Given all days of data, which interval during the day has the highest average number of steps?
 
@@ -71,7 +72,7 @@ It looks like `r maxinterval$interval` is the time during the day with the highe
 *** 
 ### How Do Missing Values Affect the Analysis?
 
-There are `r nrow(filter(activity, is.na(steps)))` missing or NA values in our dataset.  If we assume that the person simply forgot to wear the device during an otherwise normal day, then we could assume that during each NA interval, the average number of steps for that interval were performed.  
+There are 2304 missing or NA values in our dataset.  If we assume that the person simply forgot to wear the device during an otherwise normal day, then we could assume that during each NA interval, the average number of steps for that interval were performed.  
 
 Therefore, we'll create a new dataset in which each NA interval value is replaced with the mean(steps) for that interval.
 
@@ -102,7 +103,7 @@ The median daily step total for the imputed set is:
 min(totday_imputed$median)
 ```
 
-As we see in the statistics and in the distributions, the using some values instead of ignoring values will nudge the averages up a bit.
+As we see in the statistics and in the distributions, using some imputed values instead of ignoring values will nudge the averages up a bit.
 
 Again, use bin widths of 1000 and 2000 for the histograms.
 
@@ -111,11 +112,14 @@ ghist_imputed <- ggplot(totday_imputed, aes(sum)) + geom_histogram(fill = "blue"
 ghist_imputed <- ghist_imputed + labs(title = "Distribution of Total Steps With Imputed Missing Values", x = "Steps per Day", y = "Number of days")
 ghist_imputed
 ```
+![figure 4](https://github.com/lmarin17/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-11-1.png)
+
 ```{r}
 ghist_imputed <- ggplot(totday_imputed, aes(sum)) + geom_histogram(fill = "blue", binwidth = 1000)
 ghist_imputed <- ghist_imputed + labs(title = "Distribution of Total Steps With Imputed Missing Values", x = "Steps per Day", y = "Number of days")
 ghist_imputed
 ```
+![figure 5](https://github.com/lmarin17/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-12-1.png)
 
 ***
 ### Does Activity Differ Between Weekdays and Weekends?
@@ -142,7 +146,7 @@ gweekday <- gweekday + geom_line() + facet_grid(dayOfWeek ~ .)
 gweekday <- gweekday + labs(x = "Interval", y = "Average # of Steps", title = "Step Activity Weekdays VS Weekends")
 gweekday
 ```
-
+![figure 6](https://github.com/lmarin17/RepData_PeerAssessment1/blob/master/PA1_template_files/figure-html/unnamed-chunk-15-1.png)
 ***
 ### Conclusion
 
